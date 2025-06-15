@@ -30,18 +30,19 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-                    <cloudHubDeployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
-                        <muleVersion>${mule.version}</muleVersion>
-                        <username>${anypoint.username}</username>
-                        <password>${anypoint.password}</password>
-                        <applicationName>${appname}</applicationName>
-                        <businessGroup>${business}</businessGroup>
-                        <environment>${env}</environment>
-                        <workerType>${vCore}</workerType>
-                        <workers>${workers}</workers>
-                        <objectStoreV2>true</objectStoreV2>
-                    </cloudHubDeployment>
+    <deployment>
+        <target>CH2</target> <!-- or name of your target (e.g., Runtime Fabric Target name) -->
+        <uri>https://anypoint.mulesoft.com</uri>
+        <muleVersion>${mule.version}</muleVersion>
+        <username>${anypoint.username}</username>
+        <password>${anypoint.password}</password>
+        <applicationName>${appname}</applicationName>
+        <businessGroup>${business}</businessGroup>
+        <environment>${env}</environment>
+        <objectStoreV2>true</objectStoreV2>
+        <redeploy>true</redeploy>
+    </deployment>
+
                 </configuration>
 				
 			</plugin>
