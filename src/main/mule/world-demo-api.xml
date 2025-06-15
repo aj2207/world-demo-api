@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3e8aee23-9d43-4f2f-98b8-9ce1be246d0f" basePath="/timezone" >
+		<http:listener-connection host="0.0.0.0" port="8089" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="202d9f6b-eb05-4c48-ad80-d7a032b3757e" >
+		<http:request-connection protocol="HTTPS" host="api.api-ninjas.com" />
+	</http:request-config>
+	<flow name="world-demo-apiFlow" doc:id="34b4b01a-06cf-409a-846e-2b26c1582c54" >
+		<http:listener doc:name="Listener" doc:id="a6ee694c-0b2a-4bfb-aac6-986b7d5fafff" config-ref="HTTP_Listener_config" path="/*"/>
+		<ee:transform doc:name="Transform Message" doc:id="463323ea-89ea-46fa-af10-1c7b383a3be9" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	"Status" : "Healthy"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
